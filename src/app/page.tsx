@@ -1,103 +1,79 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <>
+      <div id="hero" className="relative h-[550px] w-full">
+        <img
+          src="/hero-photo.jpg"
+          alt="Imagen Principal"
+          className="w-full h-full object-cover"
         />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/0"></div>
+        <div className="absolute top-1/2 left-0 transform -translate-y-1/2 text-left p-8 md:p-16 w-full max-w-4xl">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+            Planifica tu próximo viaje con Itinetravel
+          </h1>
+          <p className="text-lg md:text-2xl text-white mb-8 drop-shadow-lg">
+            Crea itinerarios personalizados y descubre nuevas aventuras
+          </p>
           <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#"
+            className="bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-amber-500 transition-all duration-300 ease-in-out drop-shadow-lg"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+            Comienza Ahora
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
+      </div>
+      <section id="info" className="px-10 md:px-20 bg-white w-full py-10">
+        <div className="flex flex-row justify-between">
+          <div className="w-full md:w-2/3">
+            <h1 className="text-blue-600 text-4xl font-semibold">¿Que es Itinetravel?</h1>
+            <p className="mt-4 max-w-3xl text-neutral-800 text-lg">
+            Itinetravel es una aplicación diseñada para ayudarte a planificar y organizar tus viajes de manera eficiente. Con nuestra plataforma, puedes crear itinerarios personalizados, descubrir destinos emocionantes y gestionar todos los aspectos de tu viaje en un solo lugar.
+            </p>
+            <p className="mt-4 max-w-3xl text-neutral-800 text-lg">
+            Ya sea que estés planeando unas vacaciones, un viaje de negocios o una escapada de fin de semana, Itinetravel te proporciona las herramientas necesarias para hacer que tu experiencia de viaje sea inolvidable. <b>¡Empieza a planificar tu próxima aventura con Itinetravel hoy mismo!</b> 
+            </p>
+          </div>
+          <div className="hidden md:flex md:justify-center md:items-center md:flex-row md:w-1/3 md:h-full">
+            <img src="/paris.jpg" alt="Imagen de Paris" className="w-[400px] h-[300px] rounded-xl"/>
+          </div>
+        </div>
+      </section>
+      <section id="usersNumber" className="px-20 bg-white w-full py-20 text-center">
+        <h1 className="text-5xl font-semibold text-blue-600 mb-2">
+          <b>+10.000</b> USUARIOS
+        </h1>
+        <p className="text-lg text-neutral-800">
+          Confían en Itinetravel para planificar sus viajes
+        </p>
+      </section>
+      <section id="features" className="px-20 w-full py-10 flex flex-col gap-10 text-center justify-center items-center">
+        <h1 className="text-neutral-800 text-2xl font-semibold">Con Itinetravel disfrutas de:</h1>
+        <div id="features-cards" className="flex flex-col md:flex-row gap-10 justify-center items-center">
+          <div id="feature-card" className="w-fit md:w-[300px] px-5 py-15 rounded-2xl text-center text-yellow-500 flex flex-col justify-center items-center gap-3 border-2 border-blue-600">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" className="fill-current w-[60px] h-[60px]"><path d="M320 576C178.6 576 64 461.4 64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576zM438 209.7C427.3 201.9 412.3 204.3 404.5 215L285.1 379.2L233 327.1C223.6 317.7 208.4 317.7 199.1 327.1C189.8 336.5 189.7 351.7 199.1 361L271.1 433C276.1 438 282.9 440.5 289.9 440C296.9 439.5 303.3 435.9 307.4 430.2L443.3 243.2C451.1 232.5 448.7 217.5 438 209.7z"/></svg>
+            <h2 className="text-2xl font-semibold text-blue-600 mb-2">Itinerarios Personalizados</h2>
+            <p className="text-neutral-800 max-w-sm">Crea y ajusta tus itinerarios de viaje según tus preferencias y necesidades.</p>
+          </div>
+          <div id="feature-card" className="w-fit md:w-[300px] px-5 py-15 rounded-2xl text-center text-yellow-500 flex flex-col justify-center items-center gap-3 border-2 border-blue-600">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" className="fill-current w-[60px] h-[60px]"><path d="M415.9 344L225 344C227.9 408.5 242.2 467.9 262.5 511.4C273.9 535.9 286.2 553.2 297.6 563.8C308.8 574.3 316.5 576 320.5 576C324.5 576 332.2 574.3 343.4 563.8C354.8 553.2 367.1 535.8 378.5 511.4C398.8 467.9 413.1 408.5 416 344zM224.9 296L415.8 296C413 231.5 398.7 172.1 378.4 128.6C367 104.2 354.7 86.8 343.3 76.2C332.1 65.7 324.4 64 320.4 64C316.4 64 308.7 65.7 297.5 76.2C286.1 86.8 273.8 104.2 262.4 128.6C242.1 172.1 227.8 231.5 224.9 296zM176.9 296C180.4 210.4 202.5 130.9 234.8 78.7C142.7 111.3 74.9 195.2 65.5 296L176.9 296zM65.5 344C74.9 444.8 142.7 528.7 234.8 561.3C202.5 509.1 180.4 429.6 176.9 344L65.5 344zM463.9 344C460.4 429.6 438.3 509.1 406 561.3C498.1 528.6 565.9 444.8 575.3 344L463.9 344zM575.3 296C565.9 195.2 498.1 111.3 406 78.7C438.3 130.9 460.4 210.4 463.9 296L575.3 296z"/></svg>
+            <h2 className="text-2xl font-semibold text-blue-600 mb-2">
+              Acceso desde cualquier lugar
+            </h2>
+            <p className="text-neutral-800 max-w-sm">
+              Accede a tus itinerarios y planes de viaje desde cualquier dispositivo, en cualquier momento y lugar.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="callToAction" className="px-20 py-10 text-center">
+        <h1 className="font-bold text-blue-600 mb-8 text-3xl">
+          ¿Que esperas para ser parte de nuestra familia?
+        </h1>
+        <a href="" className="text-xl text-white bg-blue-600 px-4 py-2 rounded-2xl hover:bg-amber-500 transition-all duration-300 ease-in-out">
+          ¡Únete a nostros!
         </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+    </>
   );
 }
