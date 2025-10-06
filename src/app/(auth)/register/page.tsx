@@ -95,6 +95,7 @@ export default function Home() {
       localStorage.setItem("id", response.data.id);
       localStorage.setItem("token", response.data.token);
 
+      window.location.href = "/home";
     } catch (error) {
       toast.error("Error al registrar el usuario");
       console.error(error);

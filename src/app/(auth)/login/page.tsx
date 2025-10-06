@@ -60,6 +60,8 @@ export default function Home() {
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("id", response.data.id);
+
+      window.location.href = "/home";
     } catch (error) {
       toast.error("Error al iniciar sesión");
       console.error(error);
