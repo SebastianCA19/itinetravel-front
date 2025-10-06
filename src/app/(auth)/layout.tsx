@@ -1,7 +1,6 @@
 import type { Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
-import Logo from "./Logo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,8 +26,7 @@ export default function AuthLayout({
     return (
         <html lang="es">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <Logo />
-          <div className="w-screen h-screen bg-gradient-to-r from-cyan-500 to-blue-500 flex flex-col justify-center items-center">
+          <div className="w-screen h-screen">
             {children}
           </div>
         </body>
