@@ -18,7 +18,6 @@ export default function Home() {
     const { name, value } = e.target;
 
     if(name === "phone"){
-      // Allow only digits in the phone input
       const numericValue = value.replace(/\D/g, '');
       
       if(numericValue.length <= 9){
@@ -36,7 +35,7 @@ export default function Home() {
     });
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (form.password !== form.conPassword) {

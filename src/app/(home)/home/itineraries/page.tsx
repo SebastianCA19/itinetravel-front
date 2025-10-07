@@ -160,6 +160,7 @@ export default function ItinerariesPage() {
     if (!response.ok) throw new Error("Failed to fetch itineraries");
     const userTrips = await response.json();
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const transformedTrips = await Promise.all(
       userTrips.data.map(async (trip: any) => {
         try {
@@ -171,7 +172,7 @@ export default function ItinerariesPage() {
 
           let activities = [];
           if (activitiesResponse.ok) {
-            const activitiesData = await activitiesResponse.json();
+            const activitiesData = await activitiesResponse.json(); 
             activities = activitiesData.data.map((item: any) => ({
               ...item,
               type:
@@ -262,7 +263,7 @@ export default function ItinerariesPage() {
   setLoading(false);
 };
 
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleAddItem = async () => {
   if (!selectedItinerary) return;
 
