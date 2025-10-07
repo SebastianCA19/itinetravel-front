@@ -29,7 +29,7 @@ export default function HomeLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-900 flex flex-col md:flex-row min-h-screen`}
       >
-        <div id="sidebar-container" className="z-20">
+        <div id="sidebar-container" className="z-20 sticky top-0 h-screen">
           <Sidebar />
         </div>
 

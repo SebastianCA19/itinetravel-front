@@ -17,7 +17,7 @@ export default function Home() {
     });
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_API;
@@ -36,7 +36,6 @@ export default function Home() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
         throw new Error("Las credenciales son incorrectas");
       }
 
