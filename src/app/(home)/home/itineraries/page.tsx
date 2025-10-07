@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Plus, MapPin, Calendar, Hotel, Plane, UtensilsCrossed, Camera, Trash2, X, Loader2 } from "lucide-react";
+import { Plus, MapPin, Calendar, Hotel, Plane, UtensilsCrossed, Camera, Trash2, X, Loader2, Bus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 
 // Types based on backend API
@@ -20,7 +20,6 @@ interface LodgingItem {
   idAlojamiento?: number;
   idViaje: number;
   idTipoActividad: number;
-  idUbicacion?: number;
   titulo: string;
   descripcionActividad: string;
   fecha: string;
@@ -37,7 +36,6 @@ interface TransportItem {
   idTransporte?: number;
   idViaje: number;
   idTipoActividad: number;
-  idUbicacion?: number;
   titulo: string;
   descripcionActividad: string;
   fecha: string;
@@ -53,7 +51,6 @@ interface FlightItem {
   idVuelo?: number;
   idViaje: number;
   idTipoActividad: number;
-  idUbicacion?: number;
   titulo: string;
   descripcionActividad: string;
   fecha: string;
@@ -114,8 +111,7 @@ export default function ItinerariesPage() {
     checkIn: "",
     checkOut: "",
     contacto: "",
-    idTipoActividad: 3, // Lodging type
-    idUbicacion: undefined as number | undefined
+    idTipoActividad: 4,
   });
 
   const [transportForm, setTransportForm] = useState({
@@ -127,8 +123,7 @@ export default function ItinerariesPage() {
     empresa: "",
     origenTransporte: "",
     destinoTransporte: "",
-    idTipoActividad: 4, // Transport type
-    idUbicacion: undefined as number | undefined
+    idTipoActividad: 6, // Transport type
   });
 
   const [flightForm, setFlightForm] = useState({
@@ -141,7 +136,6 @@ export default function ItinerariesPage() {
     idOrigenVuelo: undefined as number | undefined,
     idDestinoVuelo: undefined as number | undefined,
     idTipoActividad: 5, // Flight type
-    idUbicacion: undefined as number | undefined
   });
 
   // Fetch all trips and filter by traveler ID
@@ -182,8 +176,8 @@ export default function ItinerariesPage() {
               ...item,
               type:
                 item.idTipoActividad === 2 ? "activity" :
-                item.idTipoActividad === 3 ? "lodging" :
-                item.idTipoActividad === 4 ? "transport" :
+                item.idTipoActividad === 4 ? "lodging" :
+                item.idTipoActividad === 6 ? "transport" :
                 item.idTipoActividad === 5 ? "flight" :
                 "activity"
             }));
@@ -290,22 +284,29 @@ export default function ItinerariesPage() {
         break;
 
       case "lodging":
-        endpoint = `${BACKEND_URL}/api/alojamientos`;
+
+        const checkInDate = new Date(lodgingForm.checkIn);
+        if (checkInDate < new Date()) {
+          toast.error("La fecha de check-in debe ser futura");
+          return;
+      }
+
+        endpoint = `${BACKEND_URL}/api/actividades/alojamientos`;
         payload = {
           idViaje: selectedItinerary,
           ...lodgingForm,
-          fecha: lodgingForm.fecha ? `${lodgingForm.fecha}T00:00:00` : undefined,
+          fecha: lodgingForm.fecha ? `${lodgingForm.fecha}T12:00:00` : undefined,
           checkIn: lodgingForm.checkIn
-            ? `${lodgingForm.checkIn}T00:00:00`
+            ? `${lodgingForm.checkIn}T12:00:00`
             : undefined,
           checkOut: lodgingForm.checkOut
-            ? `${lodgingForm.checkOut}T00:00:00`
+            ? `${lodgingForm.checkOut}T12:00:00`
             : undefined,
         };
         break;
 
       case "transport":
-        endpoint = `${BACKEND_URL}/api/transportes`;
+        endpoint = `${BACKEND_URL}/api/actividades/transportes`;
         payload = {
           idViaje: selectedItinerary,
           ...transportForm,
@@ -316,7 +317,7 @@ export default function ItinerariesPage() {
         break;
 
       case "flight":
-        endpoint = `${BACKEND_URL}/api/vuelos`;
+        endpoint = `${BACKEND_URL}/api/actividades/vuelos`;
         payload = {
           idViaje: selectedItinerary,
           ...flightForm,
@@ -325,7 +326,8 @@ export default function ItinerariesPage() {
         break;
     }
 
-    // 🔥 Aquí usas toast.promise para envolver la llamada fetch
+    console.log("Payload to be sent:", payload);
+
     await toast.promise(
       (async () => {
         const response = await fetch(endpoint, {
@@ -337,13 +339,17 @@ export default function ItinerariesPage() {
           body: JSON.stringify(payload),
         });
 
-        if (!response.ok) throw new Error("Error al agregar la actividad");
+        if (!response.ok){
+          console.log("Response not ok:", response);
+          console.log("Response body", await response.text());
+          throw new Error("Error al agregar la actividad");
+        }  
         return response.json();
       })(),
       {
         loading: "Agregando actividad...",
-        success: "Actividad agregada con éxito 🎉",
-        error: "Error al agregar la actividad 😢",
+        success: "Actividad agregada con éxito",
+        error: "Error al agregar la actividad",
       }
     );
 
@@ -369,8 +375,7 @@ export default function ItinerariesPage() {
       checkIn: "",
       checkOut: "",
       contacto: "",
-      idTipoActividad: 3,
-      idUbicacion: undefined,
+      idTipoActividad: 4,
     });
     setTransportForm({
       titulo: "",
@@ -381,8 +386,7 @@ export default function ItinerariesPage() {
       empresa: "",
       origenTransporte: "",
       destinoTransporte: "",
-      idTipoActividad: 4,
-      idUbicacion: undefined,
+      idTipoActividad: 6,
     });
     setFlightForm({
       titulo: "",
@@ -394,7 +398,6 @@ export default function ItinerariesPage() {
       idOrigenVuelo: undefined,
       idDestinoVuelo: undefined,
       idTipoActividad: 5,
-      idUbicacion: undefined,
     });
 
     setShowItemModal(false);
@@ -452,7 +455,7 @@ const handleDeleteItinerary = async (id: number) => {
   const getItemIcon = (type: string) => {
     switch(type) {
       case 'lodging': return <Hotel className="w-5 h-5" />;
-      case 'transport':
+      case 'transport': return <Bus className="w-5 h-5" />;
       case 'flight': return <Plane className="w-5 h-5" />;
       case 'activity': return <Camera className="w-5 h-5" />;
       default: return <MapPin className="w-5 h-5" />;

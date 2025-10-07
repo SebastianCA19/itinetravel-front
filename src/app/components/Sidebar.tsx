@@ -157,6 +157,19 @@ React.useEffect(() => {
 
             {/* Profile Section */}
 <div className="px-4 py-4 border-t border-gray-200">
+  <button
+    onClick={() => {
+      localStorage.removeItem("id");
+      localStorage.removeItem("token");
+      window.location.href = "/login";
+    }}
+    className="w-full mb-3 flex items-center gap-2 px-3 py-2 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 font-medium transition-all duration-200"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1" />
+    </svg>
+    Cerrar sesión
+  </button>
   <Link
     href="/profile"
     className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition-all duration-200 group"
